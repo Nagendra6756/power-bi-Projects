@@ -1,0 +1,60 @@
+1.Date=CALENDAR(start date, end date)
+Note:Mark table as date table in the power bi.
+2.Month.no=MONTH('Date'[Date])
+3.Month Name=FORMATE('Date'[Date],"MMM")
+4.Week no=WEEKDAY('Date'[Date],2)
+5.Week name=FORMATE('Date'[Date],"DDD")
+Measures:
+6.Total sales=SUMX(table,quantity*unit price)
+7.Total cost=SUMX(table,quantity*unit cost)
+8.Total profit=Total sales-Total cost
+9.profit %=DIVIDE([TOTAL PROFIT],[TOTAL SALES],0)
+10.Total transactions=COUNTROWS(TABLE NAME)
+11.Distinct CID=DISTINCTCOUNT('Salesdetails'[customer name index])
+
+Time intelligence:
+11.sales last year=CALCULATE(Total sales),SAMEPERIODLASTYEAR('Date'[Date])
+12.sales last year=CALCULATE(Total sales),DATEADD('Date'[Date],-1,YEAR))
+13.Profit LY=CALCULATE(Total profit),DATEADD('Date'[Date],-1,YEAR))
+14.YOY Sales diff=total sales-ly sales.
+15.Average daily sales=AVERAGEX(VALUES(Dimdate[Date]),[Total sales])
+16.Last purchase date=LASTDATE('sales details'[Orderdate])
+17.Days since last purchase=DATEDIFF([Last purchase Date],TODAY(),Day)
+
+YEAR WISE SALES:
+15.2019 Sales=CALCULATE([TOTAL SALES],FILTER(Dimdate,Dimdate[Year]=2019))
+16.2020 Sales=CALCULATE([TOTAL SALES],FILTER(Dimdate,Dimdate[Year]=2020))
+
+Top Performer:
+17.Top 5 Customers=CALCUALTE([Total sales],Filter(VALUES('Customer details[Customer Names]),
+if(RANKX(ALL('Customer details'[Customer Names]),[Total sales],,DESC)<=5,[Total sales],BLANK()))).
+18.Top 10 Products=CALCUALTE([Total sales],Filter(VALUES('Produuct details[product Names]),
+if(RANKX(ALL('product details'[product Names]),[Total sales],,DESC)<=10,[Total sales],BLANK()))).
+19.Top 5 cities=CALCUALTE([Total sales],Filter(VALUES('region'[city]),
+if(RANKX(ALL('region'[city]),[Total sales],,DESC)<=5,[Total sales],BLANK()))).
+
+Seasonal sales:
+20.2019 summer sales=CALCULATE([Total sales],DATESBETWEEN('sales details'[OrderDate],DATE(2019,6,1),DATE(2019,8,31)))
+21.2019 winter sales=CALCULATE([Total sales],DATESBETWEEN('sales details'[OrderDate],DATE(2019,12,1),DATE(2019,2,28)))
+22.2019 spring sales=CALCULATE([Total sales],DATESBETWEEN('sales details'[OrderDate],DATE(2019,3,1),DATE(2019,5,30)))
+23.2019 Autumn sales=CALCULATE([Total sales],DATESBETWEEN('sales details'[OrderDate],DATE(2019,9,1),DATE(2019,11,31)))
+Adding a New column for dimension table:
+1.Last purchase = MAXX(RELATEDTABLE('Sales Details'),'Sales Details'[OrderDate])
+2.Sales=SUMX(RELATETABLE('saled details'),Quantity*unitprice)
+3.sales segment=SWITCH(TRUE(),
+               'product details'[Sales]<30000000,"low sales"
+       		'Product details'[sales]<9000000,"Better sales",
+		"High sales")
+Note:adding a new column for the dimension tables "RELATE TABLE" function will be handy. 
+Creating one more Fact table:
+1.Sales Germany=FILTER('sales details',RELATED(Region[country])='Germany')
+Adding a new column to the fact table:
+2.Country=RELATED(Region[country])
+
+Feedback system:
+1.Emoji=SWITCH(TRUE(),
+        Feedback[Feedback]=1,"windows+.",
+[Feedback]=2,"windows+.",
+[Feedback]=3,"windows+.",
+[Feedback]=4,"windows+.",[Feedback]=5,"windows+.",
+)
