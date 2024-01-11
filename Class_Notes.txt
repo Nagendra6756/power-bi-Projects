@@ -1,0 +1,174 @@
+powerbi
+--18/06/23
+--Working on data connectors like excel, csv, data.world
+
+24/06/23
+--working on power query concepts fill, transpose, pivot and unpivot
+--cardinality and cross filter direction (data modeling)
+
+
+
+----------------------------------------------------------------------------------------------
+25/06/23
+
+star schema:when all dimensions are connected to one fact table. 
+
+snowflake schema: when all dimensions are not directly connected to fact table.
+ex:when there is sub category under category and that is not diretly connected to fact table.
+
+--it is a weak schema compared to star schema.
+
+1.get the data of factinternatsales, dimcustomer, dimgeography.
+2.Building relationshp between fact and dimensions.
+
+
+Joins:
+In power bi we call it as merge-
+
+1.merge query:it will combine two tables
+2.merge query as new:it will combine two tables and transform it to new table.
+
+left outer:left table +matching records
+right outer:right+matching records
+left anti:non matching records from left table(it is like except)
+
+--append 
+it works when u have same no of columns in both tables with same column names.
+
+visualization:scatter plot, waterfall chart, pie chart.
+
+
+
+----------------------------------------------------------------------------------------------
+
+01/07/2023
+
+differnece betweeen dashboard and report?
+dashboard is like readable format where we choose the multiple visuals from different reports.
+-dashboard is something like where we show it to the enduser.
+-
+
+
+Report is like powerbi desktop where we can edit.
+
+--powerbi service:
+1.creating workspace
+
+2.creating dahsboard.
+
+3.understanding lineage
+--datasource-->dataset--->report--->dashboard
+
+4.NLP inside dashbaord
+
+5.Quick insights--we can generate it for once.
+
+--we can also pin the visuals to the dashbaord.
+
+-liscences:
+
+power bi pro:10 $ per user per month
+
+--it is used for publishing 
+
+power bi premium:it is used for large organiations.
+1.per user:20$
+2.per capacity:4995$ per capacity
+
+
+In order to reduce the cost we publish in apps section.
+
+power apps
+
+
+--------------------------------------------------------------------------------------------
+02/07/2023
+DAX:
+Measures and calculated columns:
+
+aggregate functions:
+SUM:
+SUMX:iterative functions
+Some other iterative function like countx,maxx,averagex,minx,
+
+
+DAX:
+profitable or not 2 = IF(Orders[Profit]>100, "Very much profit", 
+ IF(AND(Orders[Profit]>=50,Orders[Profit]<=100), "somewhat profitable",
+ "not so profitable"))
+
+
+Variables:
+profit% var = 
+var profit=SUM(Orders[Profit])
+var sales=SUM(Orders[Sales])
+return
+profit/sales
+
+
+if function
+switch function
+calcuate-used to filter out aggregate value
+profit %
+
+
+
+------------------------------------------------------------------------------------------
+08/07/2023
+
+DAX:
+Time intellignece functions:
+
+last year sales=calculate(sum(orders[sales]),sameperiodlastyear(dimdate[date]))
+previous year sales pp = CALCULATE(SUM(Orders[Sales]),PARALLELPERIOD(Dimdate[Date],-1,QUARTER))
+
+
+connecting direct query:
+
+Data Gateways:
+1.personal mode:
+-->only i can access the data.
+-->Managing your Gateway becomes difficult(sharing and collaboration will be difficult)
+
+2.Standard mode:(Recommended)
+--working with team
+
+steps to set up gateway:
+step1:email id
+step2:enter the recovery key.
+
+
+
+----------------------------------------------------------------------------
+09/07/2023
+
+Row-level security: we give different permissions to different people based on access.
+
+Note: we will define the roles in deskotop level and publish to power bi service and Access wil  be given on power bi service.
+
+Applying manage parameters
+
+create pbit file to filter the data based on region by using parameters
+
+Deployment:
+
+
+There is another tool called Power bi desktop rs where we can publish the report to the power bi servise as well as on-prem-server(pbi report server)
+
+
+Installing power bi desktop report server  and configuring.
+
+
+Paginated report: 
+
+
+
+---15/07/2023(Powerbi project)
+
+
+
+
+
+
+
+

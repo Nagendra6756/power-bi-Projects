@@ -1,0 +1,218 @@
+power bi components:
+bi desktop:development tool
+bi service:cloud platform
+bi gateway: helps to enable schedule data refresh in datasets,reports,dashboards
+bi report server:
+
+mobile app
+bi excel publisher--integrate excel and power bi
+bi report builder-develop paginated reports,pixel perfect report for ex:invoices,recepits
+
+power bi embedded:--integration of power bi reports & dashboards in other applications(sharepoint,crm,erp,webiste,blog,mobile app etc)
+
+
+ETL-extract transform load
+
+Licenses:
+Free:Individual users, limited features
+pro:--free+ advanced features(sharing,bulk sharing,data refresh,email subs,data alerts,workspaces etc,.)  --10$ per month
+premium:-- pro+ more advance features(AI,ML, enterprise usgae, large user base) --$5000 per node
+--------------------------------------------------------------------------------------------------------------------------------------
+Dashboards can be created from same workspaces.
+
+Queries:
+sql queries: to retrive the required data from sql
+
+
+Data transformations:
+cleaning,formatting,keylookups(star schema),aggregations
+
+visualization: Finally communicating the information clearly through visuals.
+---------------------------------------------------------------------------
+Letcure3: power bi overview
+
+Lecture4: Get the data from sql server
+
+1.geting data from folder--
+
+2.getting data from azure sql database
+
+3.Enter data--for creating static data.
+------------------------------------------------------------------------
+Lecture5: Overview of power query:
+
+Lecture6: Advanced Editor
+Query Dependencies: source of the datasets.
+
+Managae column, Keep rows,remove rows, Spliting
+
+Group by: 
+Group by advanced:
+
+Merge data: we can also use merge based on multiple column.
+append data: column names and data type should be same.
+
+
+Lecture7: Data source settings.
+
+click on data source settings and change source if you want.
+
+Change orderdate format:
+Change decimal format and adding currency.
+
+Using Fill
+Using Transpose: 
+Using pivot
+Custom column
+Conditional column:
+
+Explore column from examples option:
+
+Disable load:
+Include report refresh:
+
+-------------------------------------------------------------------------
+
+Lecture8: Relationships
+
+Lecture9: Relationships:
+Data redundacy: It occures when we are extracting the column from other table using merge.
+
+Lets understand the DAX.
+--More than 200 functions are available.
+
+DAX function categories:
+Date & Time
+Time Intelligence
+Filter
+Information
+Logical
+Math & Trig
+Other
+Parent & child
+statistical
+Text
+
+Row context
+Filter context
+
+Note: calculated columns will not appear in power query
+
+TOTALSALES=SUMX(ORDERS,ORDERS[QTY]*ORDERS[UNITPRICE])
+
+DISTINCTYEARMONTH=DISTINCT(DATEKEY[YEARMONTH])
+
+ALLSALES=ALL(ORDERS[TOTALPROFIT])
+Note:All function we use basically to not filter on dashboard.
+
+YTDSALES=TOTALYTD([TOTALSALES],DATEKEY[DATE])
+---------------------------------------------------------------------------
+Lecture11-Creating a calender table:
+
+=calender(min[date],max[date])
+
+
+Time Intelligence Functions:
+TotalYTD: Jan 1 2020 to 18 may 2020
+=TOTALYTD(SUMX(ORDERS,ORDERS[UP]*ORDERS[QTY]),DATE[DATE])
+=TOTALYTD([TOTALSALES],DATEKEY[DATE])
+=TOTALQTD([TOTALSALES],DATEKEY[DATE])
+
+lASTYEARYTD=CALCULATE([YTDSALES],SAMEPERIODLASTYEAR(DATEKEY[DATE])
+
+SELECTEDCOUNTRY=SEECTEDVALUE(ORDERS[COUNTRY])
+
+Related: Can be used to extract one column from another table.
+
+Relatedtable:
+Totalorders=calculate(count(orders[orderid]),relatetable(orders))
+
+
+Allqty=calculate([totalsales],all(orders))
+
+allqty=calculate([totalsales],allexcept(orders,orders[contry])
+
+Note:all function basic doesn't affect by slicer.
+
+variables:
+Netsales=
+var grossales=sumx(orders,orders[up]*orders[qty])
+var totaldiscount=sum(orders[discount])
+
+var netsales=grossales-totaldiscount
+return netsales
+
+Summarize:
+customersalesby year=summarize(orders,datekey[date],orders[customername],'totalqty',sum(orders[qty])
+---------------------------------------------------------------------------Lecture12-Data visualization
+
+-->page layout & formatting
+-->categories with no data: 
+-->default summarization & categorization:
+
+power platform:it has multiple tools
+
+power bi
+power apps: integration of power apps inside the power bi
+it is used to build some applications
+power automate(microsfot flow)
+power virtual agents(chat bots)
+
+Exploring charts
+---------------------------------------------------------------------------Lecture13-Demo on adding visualization to a report
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
