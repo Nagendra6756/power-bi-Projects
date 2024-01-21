@@ -58,3 +58,31 @@ Feedback system:
 [Feedback]=3,"windows+.",
 [Feedback]=4,"windows+.",[Feedback]=5,"windows+.",
 )
+
+
+
+---------------------------------------------------------------------------------------
+Opening Stock = 
+CALCULATE(
+    [temp],
+    FILTER(
+        ALL('Sheet1'),
+        'Sheet1'[Date] < MAX('Sheet1'[Date])
+    )
+)
+
+
+closing Stock = 
+CALCULATE(
+    [temp],
+    FILTER(
+        ALL('Sheet1'),
+        'Sheet1'[Date] <= MAX('Sheet1'[Date])
+    )
+)
+
+
+
+Temp = sum(Sheet1[Fabinflow])+sum(Sheet1[open_stock])-sum(Sheet1[cutplan])
+
+-------------------------------------------------------------------------------------------------
